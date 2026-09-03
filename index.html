@@ -98,9 +98,9 @@
 
     <!-- İSİM SOYİSİM BÖLÜMÜ -->
     <div class="info-group">
-        <span class="info-label">Alıcı Adı Soyadı</span>
+        <span class="info-label">Alıcı Adı Soyadı / Firma</span>
         <div class="info-box">
-            <span class="info-text" id="nameText">Ahmet Yılmaz</span>
+            <span class="info-text" id="nameText">Yükleniyor...</span>
             <button class="copy-btn" onclick="copyData('nameText', this)">Kopyala</button>
         </div>
     </div>
@@ -109,13 +109,22 @@
     <div class="info-group">
         <span class="info-label">IBAN Numarası</span>
         <div class="info-box">
-            <span class="info-text" id="ibanText">TR00 0000 0000 0000 0000 0000 00</span>
+            <span class="info-text" id="ibanText">Yükleniyor...</span>
             <button class="copy-btn" onclick="copyData('ibanText', this)">Kopyala</button>
         </div>
     </div>
 </div>
 
 <script>
+    // URL üzerindeki parametreleri oku (ör: ?isim=...&iban=...)
+    const urlParams = new URLSearchParams(window.location.search);
+    const isimParam = urlParams.get('isim');
+    const ibanParam = urlParams.get('iban');
+
+    // Eğer URL'de parametre varsa ekrana yaz, yoksa varsayılan metin göster
+    document.getElementById('nameText').innerText = isimParam ? isimParam : "Firma Adı Belirtilmedi";
+    document.getElementById('ibanText').innerText = ibanParam ? ibanParam : "IBAN Belirtilmedi";
+
     function copyData(elementId, btn) {
         const textToCopy = document.getElementById(elementId).innerText;
         
